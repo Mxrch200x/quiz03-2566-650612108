@@ -6,13 +6,15 @@ import { NextResponse } from "next/server";
 export const POST = async (request) => {
   readDB();
 
-  // return NextResponse.json(
-  //   {
-  //     ok: false,
-  //     message: "Username or Password is incorrect",
-  //   },
-  //   { status: 400 }
-  // );
+  if(users != DB.users){
+    return NextResponse.json(
+      {
+        ok: false,
+        message: "Username or Password is incorrect",
+      },
+      { status: 400 }
+    );
+  }
 
   const token = "Replace this with token creation";
 

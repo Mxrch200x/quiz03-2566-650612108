@@ -8,30 +8,34 @@ export const GET = async () => {
   return NextResponse.json({
     ok: true,
     //rooms:
-    //totalRooms:
+    //totalRooms: rooms.length
   });
 };
 
 export const POST = async (request) => {
   const payload = checkToken();
 
-  // return NextResponse.json(
-  //   {
-  //     ok: false,
-  //     message: "Invalid token",
-  //   },
-  //   { status: 401 }
-  // );
+  if(!DB.rooms ){
+    return NextResponse.json(
+      {
+        ok: false,
+        message: "Invalid token",
+      },
+      { status: 401 }
+    );
+  }
 
   readDB();
 
-  // return NextResponse.json(
-  //   {
-  //     ok: false,
-  //     message: `Room ${"replace this with room name"} already exists`,
-  //   },
-  //   { status: 400 }
-  // );
+if(DB.rooms == rooms){
+    return NextResponse.json(
+      {
+        ok: false,
+        message: `Room ${"replace this with room name"} already exists`,
+      },
+      { status: 400 }
+    );
+  }
 
   const roomId = nanoid();
 
